@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>资源下载 - sh1razu</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/resource.css">
+    <script src="../js/transition.js"></script>
+    <script src="../js/animations.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html" title="返回首页">首页</a></li>
+                <li><a href="blog.html" title="访问博客">博客</a></li>
+                <li><a href="project.html" title="访问项目">项目</a></li>
+                <li><a href="resource.html" title="访问资源下载" class="active">资源</a></li>
+                <li><a href="about.html" title="访问关于我">关于我</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="resource-container">
+        <div class="resource-layout">
+            <!-- 侧边栏 - 资源目录 -->
+            <aside class="resource-sidebar">
+                <div class="sidebar-header">
+                    <h3>资源目录</h3>
+                    <div class="sidebar-toggle" id="sidebarToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <nav class="resource-toc">
+                    <ul>
+                        <li><a href="#html-notes" class="toc-link">HTML学习笔记</a></li>
+                        <li><a href="#css-guide" class="toc-link">CSS样式指南</a></li>
+                        <li><a href="#js-basics" class="toc-link">JavaScript基础</a></li>
+                        <li><a href="#project-templates" class="toc-link">项目模板</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- 主要内容区域 -->
+            <div class="resource-content">
+                <h1>资源下载</h1>
+                <p class="resource-intro">这里是我分享的各种资源下载链接，包括代码库、工具、文档等。</p>
+                
+                <div class="resource-list">
+                    <div class="resource-item" id="html-notes">
+                        <h3>HTML学习笔记</h3>
+                        <p>HTML标签和基础语法的详细笔记文档</p>
+                        <a href="../resource/html的标签笔记.docx" download="html的标签笔记.docx" class="download-btn">下载笔记</a>
+                    </div>
+                    
+                    <div class="resource-item" id="css-guide">
+                        <h3>CSS样式指南</h3>
+                        <p>CSS样式和布局的实用指南</p>
+                        <a href="#" class="download-btn" onclick="alert('文件正在准备中，敬请期待！')">即将上线</a>
+                    </div>
+                    
+                    <div class="resource-item" id="js-basics">
+                        <h3>JavaScript基础</h3>
+                        <p>JavaScript编程基础教程</p>
+                        <a href="#" class="download-btn" onclick="alert('文件正在准备中，敬请期待！')">即将上线</a>
+                    </div>
+                    
+                    <div class="resource-item" id="project-templates">
+                        <h3>项目模板</h3>
+                        <p>Web开发项目模板集合</p>
+                        <a href="#" class="download-btn" onclick="alert('文件正在准备中，敬请期待！')">即将上线</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <address>
+            个人邮箱：<a href="mailto:kang844949851@gmail.com">kang844949851@gmail.com</a><br>
+            <p>&copy; 2006-2025 sh1razu</p>
+        </address>
+    </footer>
+
+    <script>
+        // 侧边栏优化功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.querySelector('.resource-sidebar');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            // 侧边栏切换功能
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('sidebar-collapsed');
+                    this.classList.toggle('active');
+                    
+                    // 汉堡菜单动画
+                    const spans = this.querySelectorAll('span');
+                    if (sidebar.classList.contains('sidebar-collapsed')) {
+                        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        spans[1].style.opacity = '0';
+                        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
+                });
+            }
+        
+            // 平滑滚动到资源项
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // 添加点击反馈
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                        
+                        // 平滑滚动
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // 在移动端点击后自动折叠侧边栏
+                        if (window.innerWidth <= 1024) {
+                            sidebar.classList.add('sidebar-collapsed');
+                            const spans = sidebarToggle.querySelectorAll('span');
+                            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                            spans[1].style.opacity = '0';
+                            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                        }
+                    }
+                });
+            });
+        
+            // 高亮当前查看的资源项
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0.1
+            };
+        
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        const activeLink = document.querySelector(`.toc-link[href="#${id}"]`);
+                        
+                        // 移除所有激活状态
+                        tocLinks.forEach(link => {
+                            link.classList.remove('active');
+                            link.style.transform = '';
+                        });
+                        
+                        // 添加当前激活状态
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                            activeLink.style.transform = 'translateX(5px)';
+                        }
+                    }
+                });
+            }, observerOptions);
+        
+            // 观察所有资源项
+            const resourceItems = document.querySelectorAll('.resource-item');
+            resourceItems.forEach(item => {
+                observer.observe(item);
+            });
+        
+            // 添加滚动时侧边栏的微妙效果
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (sidebar && window.innerWidth > 1024) {
+                    if (scrollTop > lastScrollTop) {
+                        sidebar.style.transform = 'translateY(2px)';
+                    } else {
+                        sidebar.style.transform = 'translateY(-2px)';
+                    }
+                    setTimeout(() => {
+                        sidebar.style.transform = 'translateY(0)';
+                    }, 100);
+                }
+                lastScrollTop = scrollTop;
+            });
+        
+            // 快捷键支持：Ctrl+B 切换侧边栏
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'b') {
+                    e.preventDefault();
+                    if (sidebarToggle) {
+                        sidebarToggle.click();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

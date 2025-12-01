@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>博客 - sh1razu</title>
+    <link rel="stylesheet" href="../css/blog.css">
+    <!-- 添加页面切换和动画脚本 -->
+    <script src="../js/transition.js"></script>
+    <script src="../js/animations.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html" title="返回首页">首页</a></li>
+                <li><a href="blog.html" title="访问博客" class="active">博客</a></li>
+                <li><a href="project.html" title="访问项目">项目</a></li>
+                <li><a href="resource.html" title="访问资源下载">资源</a></li>
+                <li><a href="about.html" title="访问关于我">关于我</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="blog-container">
+        <div class="blog-layout">
+            <!-- 侧边栏 - 博客目录 -->
+            <aside class="blog-sidebar">
+                <div class="sidebar-header">
+                    <h3>博客目录</h3>
+                    <div class="sidebar-toggle" id="sidebarToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <nav class="blog-toc">
+                    <ul>
+                        <li><a href="#post1" class="toc-link">HTML和CSS学习心得</a></li>
+                        <li><a href="#post2" class="toc-link">开始学习编程的感想</a></li>
+                        <li><a href="#post3" class="toc-link">个人网站开发日记 01</a></li>
+                        <li><a href="#post4" class="toc-link">个人网站开发日记 02</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- 主要内容区域 -->
+            <div class="blog-content">
+                <h1>我的博客</h1>
+                <p class="blog-intro">这里记录我的学习笔记、技术分享和生活感悟</p>
+                
+                <section class="blog-posts">
+                    <!-- 博客文章1 -->
+                    <article class="blog-post" id="post1">
+                        <div class="post-meta">
+                            <time datetime="2024-01-15">2025年11月20日</time>
+                            <span class="category">技术分享</span>
+                        </div>
+                        <h2><a href="#post1">HTML和CSS学习心得</a></h2>
+                        <p class="post-excerpt">最近学习了HTML和CSS的基础知识，发现前端开发真的很有趣。从简单的标签到复杂的布局，每一步都充满挑战...</p>
+                        <a href="#post1" class="read-more">阅读全文 →</a>
+                    </article>
+
+                    <article class="blog-post" id="post2">
+                        <div class="post-meta">
+                            <time datetime="2024-01-10">2025年11月29日</time>
+                            <span class="category">生活感悟</span>
+                        </div>
+                        <h2><a href="#post2">开始学习编程的感想</a></h2>
+                        <p class="post-excerpt">作为一名前端开发新手，刚开始接触html时感到有些迷茫。随着学习的深入，逐渐理解了编程的逻辑和美感...</p>
+                        <a href="#post2" class="read-more">阅读全文 →</a>
+                    </article>
+
+                    <!-- 博客文章3 -->
+                    <article class="blog-post" id="post3">
+                        <div class="post-meta">
+                            <time datetime="2024-01-05">2025年11月30日</time>
+                            <span class="category">项目进展</span>
+                        </div>
+                        <h2><a href="#post3">个人网站开发日记 01</a></h2>
+                        <p class="post-excerpt">今天完成了个人网站的基本框架搭建。从设计到实现，每一步都是新的尝试。接下来要完善博客功能...</p>
+                        <a href="#post3" class="read-more">阅读全文 →</a>
+                    </article>
+
+                    <!-- 博客文章4 -->
+                    <article class="blog-post" id="post4">
+                        <div class="post-meta">
+                            <time datetime="2024-01-05">2025年11月30日</time>
+                            <span class="category">项目进展</span>
+                        </div>
+                        <h2><a href="#post4">个人网站开发日记 02</a></h2>
+                        <p class="post-excerpt">今天上线了个人网站至GitHub，不过仍需要继续完善，将尚未完成的部分完成。mdn的文档讲的非常nice，非常适合我这种自学者学习。之后有想法加入一个网盘功能来存储我的学习笔记和一些学习资料，可以把我的win本做成服务器（不太现实但是可以考虑）。</p>
+                        <a href="#post4" class="read-more">阅读全文 →</a>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <address>
+            个人邮箱：<a href="mailto:kang844949851@gmail.com">kang844949851@gmail.com</a><br>
+            <p>&copy; 2006-2025 sh1razu</p>
+        </address>
+    </footer>
+
+    <script>
+        // 侧边栏优化功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.querySelector('.blog-sidebar');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            // 侧边栏切换功能
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('sidebar-collapsed');
+                    this.classList.toggle('active');
+                    
+                    // 汉堡菜单动画
+                    const spans = this.querySelectorAll('span');
+                    if (sidebar.classList.contains('sidebar-collapsed')) {
+                        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        spans[1].style.opacity = '0';
+                        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
+                });
+            }
+        
+            // 平滑滚动到文章
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // 添加点击反馈
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                        
+                        // 平滑滚动
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // 在移动端点击后自动折叠侧边栏
+                        if (window.innerWidth <= 1024) {
+                            sidebar.classList.add('sidebar-collapsed');
+                            const spans = sidebarToggle.querySelectorAll('span');
+                            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                            spans[1].style.opacity = '0';
+                            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                        }
+                    }
+                });
+            });
+        
+            // 高亮当前阅读的文章
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0.1
+            };
+        
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        const activeLink = document.querySelector(`.toc-link[href="#${id}"]`);
+                        
+                        // 移除所有激活状态
+                        tocLinks.forEach(link => {
+                            link.classList.remove('active');
+                            link.style.transform = '';
+                        });
+                        
+                        // 添加当前激活状态
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                            activeLink.style.transform = 'translateX(5px)';
+                        }
+                    }
+                });
+            }, observerOptions);
+        
+            // 观察所有博客文章
+            const blogPosts = document.querySelectorAll('.blog-post');
+            blogPosts.forEach(post => {
+                observer.observe(post);
+            });
+        
+            // 添加滚动时侧边栏的微妙效果
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop) {
+                    // 向下滚动
+                    sidebar.style.transform = 'translateY(2px)';
+                } else {
+                    // 向上滚动
+                    sidebar.style.transform = 'translateY(-2px)';
+                }
+                
+                lastScrollTop = scrollTop;
+                
+                // 添加延迟恢复
+                clearTimeout(this.scrollTimeout);
+                this.scrollTimeout = setTimeout(() => {
+                    sidebar.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        
+            // 添加键盘导航支持
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'b') {
+                    e.preventDefault();
+                    sidebar.classList.toggle('sidebar-collapsed');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
