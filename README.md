@@ -1,2 +1,2 @@
-website:https://sh1razuazu5a.github.io/my-web/index.html
+website:https://www.shirazu-nagisa.com
 welcome to watch it!
